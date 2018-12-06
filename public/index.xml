@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oliver&#39;s Blog! on Oliver&#39;s Blog!</title>
+    <link>https://blog.oliverch.com/</link>
+    <description>Recent content in Oliver&#39;s Blog! on Oliver&#39;s Blog!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 26 Apr 2018 16:44:24 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在 CentOS 7 下安装配置 GlusterFS</title>
+      <link>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</link>
+      <pubDate>Thu, 26 Apr 2018 16:44:24 +0000</pubDate>
+      
+      <guid>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</guid>
+      <description>
+
+&lt;h1 id=&#34;glusterfs&#34;&gt;GLusterFS&lt;/h1&gt;
+
+&lt;p&gt;GlusterFS 是一个分布式文件系统，具有强大的横向扩展能力。主要提供的的存储功能为文件存储，当然也可通过其他方式支持快存储和对象存储。与存储相关的分布式文件系统还有 Ceph。&lt;/p&gt;
+
+&lt;h2 id=&#34;enviroment&#34;&gt;Enviroment&lt;/h2&gt;
+
+&lt;p&gt;OS: CentOS 7&lt;/p&gt;
+
+&lt;h2 id=&#34;install-glusterfs&#34;&gt;Install GlusterFS&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# yum -y install centos-release-gluster
+# yum install glusterfs-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configure-glusterfs&#34;&gt;Configure GlusterFS&lt;/h3&gt;
+
+&lt;p&gt;启动服务进程：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# systemctl enable glusterd.service
+# systemctl start glusterd.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;GLusterFS 节点之间通信用到了 TCP 端口 24007-24008，所以启用所需端口：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent
+# firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者选择关闭防火墙。&lt;/p&gt;
+
+&lt;h2 id=&#34;glusterfs-管理&#34;&gt;GlusterFS 管理&lt;/h2&gt;
+
+&lt;p&gt;这里简单介绍一下 GlusterFS 服务器端的管理程序 gluster 的使用。&lt;/p&gt;
+
+&lt;p&gt;这里假设拥有 4 台服务器：&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;HOSTNAME&lt;/th&gt;
+&lt;th&gt;IP-address&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;node1&lt;/td&gt;
+&lt;td&gt;xxx.xxx.xxx.xx1&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;node2&lt;/td&gt;
+&lt;td&gt;xxx.xxx.xxx.xx2&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;node3&lt;/td&gt;
+&lt;td&gt;xxx.xxx.xxx.xx3&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;node4&lt;/td&gt;
+&lt;td&gt;xxx.xxx.xxx.xx4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;peer-操作&#34;&gt;Peer 操作&lt;/h3&gt;
+
+&lt;p&gt;GlusterFS 通过添加 Peer 来创建集群。&lt;/p&gt;
+
+&lt;h4 id=&#34;peer-probe&#34;&gt;Peer probe&lt;/h4&gt;
+
+&lt;p&gt;添加 Peer 需要指定该节点的 IP 或者 HOSTNAME。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster peer probe { &amp;lt;HOSTNAME&amp;gt; | &amp;lt;IP-address&amp;gt; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如在 node1 上：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster peer probe node2
+$ gluster peer probe node3
+$ gluster peer probe node4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就能将 node1、node2、node3 和 node4 四台服务器连接，组成一个服务器集群。&lt;/p&gt;
+
+&lt;h4 id=&#34;peer-status&#34;&gt;Peer status&lt;/h4&gt;
+
+&lt;p&gt;查询集群中的节点信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster peer status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;peer-detach&#34;&gt;Peer detach&lt;/h4&gt;
+
+&lt;p&gt;移除 Peer 需要指定该节点的 IP 或者 HOSTNAME。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster peer detach { &amp;lt;HOSTNAME&amp;gt; | &amp;lt;IP-address&amp;gt; } [force] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如在 node1 移除 node2：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster peer probe node2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不能在当前服务器从集群中移除当前服务器。&lt;/p&gt;
+
+&lt;h3 id=&#34;volume-操作&#34;&gt;Volume 操作&lt;/h3&gt;
+
+&lt;p&gt;GLusterFS 通过创建 Volume 来创建一个虚拟存储池，通过 Volume 的不同类型来提供不同的存储功能。&lt;/p&gt;
+
+&lt;h4 id=&#34;volume-create&#34;&gt;Volume create&lt;/h4&gt;
+
+&lt;p&gt;创建卷需要指定卷的名字，类型和 Brick（Brcik 是指服务器上的一个目录，后端实际存储的目录）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume create &amp;lt;NEW-VOLNAME&amp;gt; [stripe &amp;lt;COUNT&amp;gt;] [replica &amp;lt;COUNT&amp;gt; [arbiter &amp;lt;COUNT&amp;gt;]] [disperse [&amp;lt;COUNT&amp;gt;]] [disperse-data &amp;lt;COUNT&amp;gt;] [redundancy &amp;lt;COUNT&amp;gt;] [transport &amp;lt;tcp|rdma|tcp,rdma&amp;gt;] &amp;lt;NEW-BRICK&amp;gt;?&amp;lt;vg_name&amp;gt;... [force]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不同类型的 Volume 对 Brick 的数量也有不同的要求。&lt;/p&gt;
+
+&lt;p&gt;假设有如下 Brick：&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;HOSTNAME&lt;/th&gt;
+&lt;th&gt;Brick&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;node1&lt;/td&gt;
+&lt;td&gt;node1:/bricks/brick01&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;node2&lt;/td&gt;
+&lt;td&gt;node2:/bricks/brick01&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;node3&lt;/td&gt;
+&lt;td&gt;node3:/bricks/brick01&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;node4&lt;/td&gt;
+&lt;td&gt;node4:/bricks/brick01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;创建一个 replica 类型的 Volume，其 COUNT 至少为2 ,至少需要指定 2 个 Brick&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume create voltest1 replica 2 node1:/bricks/brick01 node2:/bricks/brick01 node3::/bricks/brick01 node4:/bricks/brick01
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该类型 volume 可以在存储文件的时候，在服务器保存一份该文件的副本。当然 GlusterFS 还有其他很多类型的 volume 这里就不一一介绍了。&lt;/p&gt;
+
+&lt;p&gt;####Volume info&lt;/p&gt;
+
+&lt;p&gt;查看 Volume 的信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume info
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;volume-status&#34;&gt;Volume status&lt;/h4&gt;
+
+&lt;p&gt;查看 Volume 状态：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;volume-delete&#34;&gt;Volume delete&lt;/h4&gt;
+
+&lt;p&gt;删除 Volume：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume delete &amp;lt;VOLNAME&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;brick-操作&#34;&gt;Brick 操作&lt;/h3&gt;
+
+&lt;p&gt;在创建完 Volume 后，如果需要更大的空间，可以通过添加新的 Brick 来提高整体容量，同时添加 Brick 时不会停止服务。&lt;/p&gt;
+
+&lt;h4 id=&#34;brick-add-bricks&#34;&gt;Brick add-bricks&lt;/h4&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume add-brick &amp;lt;VOLNAME&amp;gt; [&amp;lt;stripe|replica&amp;gt; &amp;lt;COUNT&amp;gt; [arbiter &amp;lt;COUNT&amp;gt;]] &amp;lt;NEW-BRICK&amp;gt; ... [force]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一次添加 Brick 的数量要根据 Volume 的类型来决定。&lt;/p&gt;
+
+&lt;p&gt;例如 &lt;code&gt;voltest1&lt;/code&gt; 是 &lt;code&gt;replica 2&lt;/code&gt; 则添加时需要添加 2 的整数倍的 Brick。&lt;/p&gt;
+
+&lt;p&gt;要将 &lt;code&gt;node5/bricks/brick01&lt;/code&gt;  &lt;code&gt;node6:/bricks/brick01&lt;/code&gt;加入到 &lt;code&gt;voltest1&lt;/code&gt;  Volume 中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume add-brick voltest1 node5/bricks/brick01 node6:/bricks/brick01
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;rebalance&#34;&gt;Rebalance&lt;/h4&gt;
+
+&lt;p&gt;这时需要重新分配所保存文件的位置，这样可以确保每一个 Brick 都会被分配到文件，而不会过于集中在特定某一个 Brick。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume rebalance &amp;lt;VOLNAME&amp;gt; {{fix-layout start} | {start [force]|stop|status}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看 rebalance 状态&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume rebalance voltest1 status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;brick-替换&#34;&gt;Brick 替换&lt;/h4&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume replace-brick &amp;lt;VOLNAME&amp;gt; &amp;lt;SOURCE-BRICK&amp;gt; &amp;lt;NEW-BRICK&amp;gt; {commit force}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;假设名称为 &lt;code&gt;voltest1&lt;/code&gt; 的 Volume，使用 &lt;code&gt;node7:/bricks/brick01&lt;/code&gt;替换 &lt;code&gt;node1:/bricks/birck01&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node7:/bricks/brick01 start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时可以查看替换的状态&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后 commit 确认移除旧的 Brick&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;brick-移除&#34;&gt;Brick 移除&lt;/h4&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume remove-brick &amp;lt;VOLNAME&amp;gt; [replica &amp;lt;COUNT&amp;gt;] &amp;lt;BRICK&amp;gt; ... &amp;lt;start|stop|status|commit|force&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;移除 Brick 的数量也是由 Volume 的类型决定，&lt;/p&gt;
+
+&lt;p&gt;假设移除 &lt;code&gt;voltest1&lt;/code&gt; 类型为 replica 2 的 Brick 那么移除的 Brick 数为 replica 的整数倍。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster volume remove-brick voltest1 node1:/bricks/brick01 node2:/bricks/brick01
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;snapshot-操作&#34;&gt;Snapshot 操作&lt;/h3&gt;
+
+&lt;p&gt;Gluster 使用 LVM 的Snapshot 完成快照功能，也就是说您的 Brick 必须在 LVM 的环境中快照功能才能被使用。&lt;/p&gt;
+
+&lt;p&gt;使用 LVM 上的 Brick 创建的 Volume 可以通过快照来实现数据的快速恢复。&lt;/p&gt;
+
+&lt;h4 id=&#34;snapshot-create&#34;&gt;Snapshot create&lt;/h4&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster snapshot create &amp;lt;snapname&amp;gt; &amp;lt;volname&amp;gt; [no-timestamp] [description &amp;lt;description&amp;gt;] [force]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;snapshot-activate&#34;&gt;Snapshot activate&lt;/h4&gt;
+
+&lt;p&gt;在创建后需要激活才能使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster snapshot activate &amp;lt;snapname&amp;gt; [force]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;snapshot-info&#34;&gt;Snapshot info&lt;/h4&gt;
+
+&lt;p&gt;查看快照信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster snapshot info
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;snapshot-restore&#34;&gt;Snapshot restore&lt;/h4&gt;
+
+&lt;p&gt;GlusterFS 可以将 Volume 数据恢复到快照时的状态，但进行操作时必须停用 Volume，完成后重启。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster snapshot restore &amp;lt;snapname&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;虽然这样不影响工作，但会照成 Brick 位置的变更，若非必要，不要直接使用Snapshot 还原整个Volume。&lt;/p&gt;
+
+&lt;h4 id=&#34;snapshot-clone&#34;&gt;Snapshot clone&lt;/h4&gt;
+
+&lt;p&gt;GlusterFS 提供从一个现有的快照，创建一个新的 Volume。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gluster snapshot clone &amp;lt;cloname&amp;gt; &amp;lt;snapname&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;glusterfs-client&#34;&gt;GlusterFS Client&lt;/h2&gt;
+
+&lt;p&gt;GlusterFS 可以通过自己的客户端 Glusterfs 或者 Samba、NFS 来访问。&lt;/p&gt;
+
+&lt;h3 id=&#34;开启防火墙&#34;&gt;开启防火墙&lt;/h3&gt;
+
+&lt;p&gt;为 Glusterfs、Samba 和 NFS 开启防火墙。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# firewall-cmd --zone=public --add-service=nfs --add-service=samba --add-service=samba-client --permanent
+
+# firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp \
+--add-port=38465-38469/tcp --add-port=631/tcp --add-port=111/udp --add-port=963/udp --add-port=49152-49251/tcp  --permanent
+
+# firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然也可选择关闭防火墙。&lt;/p&gt;
+
+&lt;h3 id=&#34;glusterfs-client-1&#34;&gt;Glusterfs client&lt;/h3&gt;
+
+&lt;p&gt;安装 GLusterfs client：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# yum install glusterfs glusterfs-fuse attr -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;挂载:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# mount -t glusterfs node1:/glustervol1 /mnt/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;node1 为一个服务器节点。&lt;/p&gt;
+
+&lt;h3 id=&#34;samba&#34;&gt;Samba&lt;/h3&gt;
+
+&lt;p&gt;安装：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# yum install samba samba-client samba-common samba-vfs-glusterfs selinux-policy-targeted -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动服务：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# systemctl start smb.service
+# systemctl enable smb.service
+# systemctl start nmb.service
+# systemctl enable nmb.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在每个服务器端，修改 &lt;em&gt;/etc/samba/smb.conf&lt;/em&gt; 文件内的 GlusterFS 已创建 Volume 的配置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[gluster-glustervol1]
+comment = For samba share of volume glustervol1
+vfs objects = glusterfs
+glusterfs:volume = glustervol1
+glusterfs:logfile = /var/log/samba/glusterfs-glustervol1.%M.log
+glusterfs:loglevel = 7
+path = /
+read only = no
+guest ok = yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在后面添加一行 &lt;strong&gt;kernel share modes = No&lt;/strong&gt;。这个是为了解决挂载 samba 后创建文件后出现同时创建了多个文件的问题。具体原因不知道，如果有知道的可以交流一下。&lt;/p&gt;
+
+&lt;p&gt;修改后为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[gluster-glustervol1]
+comment = For samba share of volume glustervol1
+vfs objects = glusterfs
+glusterfs:volume = glustervol1
+glusterfs:logfile = /var/log/samba/glusterfs-glustervol1.%M.log
+glusterfs:loglevel = 7
+path = /
+read only = no
+guest ok = yes
+kernel share modes = No
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为了能够访问 Samba 需要创建用户，并设置密码。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# smbpasswd -a sambauser
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sambauser 是一个用户名，按需要进行创建。&lt;/p&gt;
+
+&lt;p&gt;设置 SELinux 运行 Samba 共享：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# setsebool -P samba_share_fusefs on
+# setsebool -P samba_load_libgfapi on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然也可以选择关闭 SELinux&lt;/p&gt;
+
+&lt;p&gt;编辑&lt;code&gt;/etc/sysconfig/selinux&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;将&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELINUX=enforcing
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;改为&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELINUX=disabled
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;挂载：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# mount -t cifs \\\\gluster1.example.com\\gluster-glustervol1 /mnt/ -o user=sambauser,pass=mypassword
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在 Windows 下 可以通过在资源管理器里添加一个新的位置来链接 Samba 共享。&lt;/p&gt;
+
+&lt;h3 id=&#34;nfs&#34;&gt;NFS&lt;/h3&gt;
+
+&lt;p&gt;需要开启 RPC 服务：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# systemctl enable rpcbind
+# systemctl start rpcbind
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;挂载：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# mount -t nfs gluster1.example.com:/glustervol1 /mnt/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;block-storage&#34;&gt;Block Storage&lt;/h2&gt;
+
+&lt;p&gt;块存储是非常常用的存储方式，GlusterFS 主要是文件存储，对于块存储要通过镜像文件的方式创建 iscsi target。&lt;/p&gt;
+
+&lt;p&gt;这里推荐一个工具来创建帮助快速创建 &lt;a href=&#34;https://github.com/gluster/gluster-block.git&#34;&gt;&lt;strong&gt;gluster-block&lt;/strong&gt;&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h2 id=&#34;引用&#34;&gt;引用&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;CentOS Wiki: &lt;a href=&#34;https://wiki.centos.org/zh/SpecialInterestGroup/Storage/gluster-Quickstart?highlight=%28GlusterFS%29&#34;&gt;gluster-Quickstart&lt;/a&gt;  &lt;a href=&#34;https://wiki.centos.org/zh/HowTos/GlusterFSonCentOS?highlight=%28GlusterFS%29&#34;&gt;GlusterFSonCentOS&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gluster-Storage_GitBook: &lt;a href=&#34;http://www.l-penguin.idv.tw/book/Gluster-Storage_GitBook/&#34;&gt;http://www.l-penguin.idv.tw/book/Gluster-Storage_GitBook/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

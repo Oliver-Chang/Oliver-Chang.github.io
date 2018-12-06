@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    <url>
+      <loc>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/categories/</loc>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/tags/centos/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/tags/glusterfs/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/categories/glusterfs/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/tags/linux/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/post/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://blog.oliverch.com/tags/</loc>
+      
+      <lastmod>2018-04-26T16:44:24+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+</urlset>

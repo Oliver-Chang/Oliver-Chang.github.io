@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Oliver&#39;s Blog!</title>
+    <link>https://blog.oliverch.com/post/</link>
+    <description>Recent content in Posts on Oliver&#39;s Blog!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 26 Apr 2018 16:44:24 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.oliverch.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在 CentOS 7 下安装配置 GlusterFS</title>
+      <link>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</link>
+      <pubDate>Thu, 26 Apr 2018 16:44:24 +0000</pubDate>
+      
+      <guid>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</guid>
+      <description>GLusterFS GlusterFS 是一个分布式文件系统，具有强大的横向扩展能力。主要提供的的存储功能为文件存储，当然也可通过其他方式支持快存储和对象存储。与存储相关的分布式文件系统还有 Ceph。
+Enviroment OS: CentOS 7
+Install GlusterFS # yum -y install centos-release-gluster # yum install glusterfs-server  Configure GlusterFS 启动服务进程：
+# systemctl enable glusterd.service # systemctl start glusterd.service  GLusterFS 节点之间通信用到了 TCP 端口 24007-24008，所以启用所需端口：
+# firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent # firewall-cmd --reload  或者选择关闭防火墙。
+GlusterFS 管理 这里简单介绍一下 GlusterFS 服务器端的管理程序 gluster 的使用。
+这里假设拥有 4 台服务器：
+   HOSTNAME IP-address     node1 xxx.xxx.xxx.xx1   node2 xxx.</description>
+    </item>
+    
+  </channel>
+</rss>

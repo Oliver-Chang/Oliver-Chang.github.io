@@ -1,6 +1,8 @@
 language: go
 install:
     - go get github.com/gohugoio/hugo
+before_script:
+    - rm -rf public 2> /dev/null
 script:
     - hugo
 deploy:

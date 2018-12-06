@@ -6,15 +6,24 @@
     <description>Recent content in Oliver&#39;s Blog! on Oliver&#39;s Blog!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 26 Apr 2018 16:44:24 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Dec 2018 00:49:56 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>About</title>
+      <link>https://blog.oliverch.com/about/</link>
+      <pubDate>Fri, 07 Dec 2018 00:49:56 +0800</pubDate>
+      
+      <guid>https://blog.oliverch.com/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>在 CentOS 7 下安装配置 GlusterFS</title>
-      <link>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</link>
+      <link>https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/</link>
       <pubDate>Thu, 26 Apr 2018 16:44:24 +0000</pubDate>
       
-      <guid>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</guid>
+      <guid>https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/</guid>
       <description>
 
 &lt;h1 id=&#34;glusterfs&#34;&gt;GLusterFS&lt;/h1&gt;
@@ -359,7 +368,7 @@ $ gluster peer probe node4
 
 &lt;p&gt;在每个服务器端，修改 &lt;em&gt;/etc/samba/smb.conf&lt;/em&gt; 文件内的 GlusterFS 已创建 Volume 的配置：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;[gluster-glustervol1]
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[gluster-glustervol1]
 comment = For samba share of volume glustervol1
 vfs objects = glusterfs
 glusterfs:volume = glustervol1
@@ -374,7 +383,7 @@ guest ok = yes
 
 &lt;p&gt;修改后为：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;[gluster-glustervol1]
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[gluster-glustervol1]
 comment = For samba share of volume glustervol1
 vfs objects = glusterfs
 glusterfs:volume = glustervol1
@@ -405,12 +414,12 @@ kernel share modes = No
 
 &lt;p&gt;将&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;SELINUX=enforcing
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;SELINUX=enforcing
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;改为&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;SELINUX=disabled
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;SELINUX=disabled
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;挂载：&lt;/p&gt;

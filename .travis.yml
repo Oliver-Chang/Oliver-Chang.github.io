@@ -1,8 +1,8 @@
 language: go
+go:
+    - "1.11.2"
 install:
-    - go get github.com/gohugoio/hugo
-before_script:
-    - rm -rf public 2> /dev/null
+    - go get -v github.com/gohugoio/hugo
 script:
     - hugo
 deploy:

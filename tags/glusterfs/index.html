@@ -1,146 +1,151 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  <meta name="author" content="Oliver Chang">
-  
-  <meta name="keywords" content="blog,developer,personal">
-  
-  
-  
-  <link rel="canonical" href="https://blog.oliverch.com/tags/glusterfs/" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           Glusterfs | Oliver&#39;s Blog!
-       
-  </title>
-  <meta name="title" content="Glusterfs | Oliver&#39;s Blog!">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Benoît Benedetti">
+    <meta name="keywords" content="">
+
+
+    <title>Glusterfs -- OliverCh&#39;s Blog!</title>
+
     
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
+    <link href="https://blog.oliverch.com/tags/glusterfs/index.xml" rel="alternate" type="application/rss+xml" title="OliverCh&#39;s Blog!" />
+    <link href="https://blog.oliverch.com/tags/glusterfs/index.xml" rel="feed" type="application/rss+xml" title="OliverCh&#39;s Blog!" />
+    
 
+    
+    <link href="https://blog.oliverch.com/css/bootstrap.min.css" rel="stylesheet">
 
-  
-    <link href="https://blog.oliverch.com/tags/glusterfs/index.xml" rel="alternate" type="application/rss+xml" title="Oliver&#39;s Blog!" />
-    <link href="https://blog.oliverch.com/tags/glusterfs/index.xml" rel="feed" type="application/rss+xml" title="Oliver&#39;s Blog!" />
-  
-  
- 
+    
+    <link href="https://blog.oliverch.com/css/clean-blog.min.css" rel="stylesheet"><link rel="stylesheet" type="text/css" href="%3cabsolute%20path%20to%20CSS%3e"><link rel="stylesheet" type="text/css" href="https://blog.oliverch.com/static/css/test.css"><link rel="stylesheet" type="text/css" href="%3cor%20just%20load%20it%20off%20the%20internet%3e">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
 
 </head>
 
-  
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://blog.oliverch.com">OliverCh&#39;s Blog!</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://blog.oliverch.com/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://blog.oliverch.com/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
 
 
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://blog.oliverch.com">Oliver&#39;s Blog!</a>
-        </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/about/" title="">About</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+    <header class="intro-header" style="background-image: url('https://blog.oliverch.com/img/home-bg.jpg')">
      <div class="container">
-        <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://blog.oliverch.com">Oliver&#39;s Blog!</a></div>
-            <div class="menu-toggle">
-                <span></span><span></span><span></span>
+       <div class="row">
+         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+           <div class="site-heading">
+             <h1>Glusterfs</h1>
+             <hr class="small">
+             <span class="subheading"></span>
+           </div>
+         </div>
+       </div>
+     </div>
+    </header>
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+              
+          
+          
+
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:oliverchangnt@gmail.com">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    
+                    <li>
+                      <a href="https://github.com/oliver-chang">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
             </div>
         </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/about/" title="">About</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/tags/" title="">Tags</a>
-                
-        </div>
-    </div>
-</nav>
-    	 <main class="main">
-          <div class="container">
-      		
-
-<div class="post-warp archive">
-    <h2 class="post-title" style="text-align:right;padding-bottom:2em">-&nbsp;Tags&nbsp;·&nbsp;Glusterfs&nbsp;-</h2>
-    
-    <article class="archive-item">
-        <a href="https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/" class="archive-item-link hvr-underline-from-center">在 CentOS 7 下安装配置 GlusterFS</a>
-        <span class="archive-item-date">
-            April 26, 2018
-        </span>
-    </article>
-     
-    
-
-</div>
-
-          </div>
-		   </main>
-      <footer class="footer">
-    <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2018 - 2018</span>
-        
-        <span class="with-love">
-    	 <i class="iconfont icon-love"></i> 
-         </span>
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://blog.oliverch.com">Oliver Chang</a> | </span> 
-         
-
-         
-		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
-    </div>
-</footer>
-
-
-
-
-
-
-
-
-
-
+    </footer>
 
     
-    <script src="/js/vendor_main.min.js" async=""></script>
+    <script src="https://blog.oliverch.com/js/jquery.min.js"></script>
 
+    
+    <script src="https://blog.oliverch.com/js/bootstrap.min.js"></script>
 
+    
+    <script src="https://blog.oliverch.com/js/clean-blog.js"></script>
 
-     </div>
-  </body>
+    
+
+</body>
+
 </html>
+

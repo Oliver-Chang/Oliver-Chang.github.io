@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Linux on OliverCh&#39;s Blog!</title>
+    <title>Linux on Oliver&#39;s Blog!</title>
     <link>https://blog.oliverch.com/tags/linux/</link>
-    <description>Recent content in Linux on OliverCh&#39;s Blog!</description>
+    <description>Recent content in Linux on Oliver&#39;s Blog!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>Code released under the Apache 2.0 license.</copyright>
     <lastBuildDate>Thu, 26 Apr 2018 16:44:24 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.oliverch.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
@@ -14,10 +13,10 @@
     
     <item>
       <title>在 CentOS 7 下安装配置 GlusterFS</title>
-      <link>https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/</link>
+      <link>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</link>
       <pubDate>Thu, 26 Apr 2018 16:44:24 +0000</pubDate>
       
-      <guid>https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/</guid>
+      <guid>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</guid>
       <description>GLusterFS GlusterFS 是一个分布式文件系统，具有强大的横向扩展能力。主要提供的的存储功能为文件存储，当然也可通过其他方式支持快存储和对象存储。与存储相关的分布式文件系统还有 Ceph。
 Enviroment OS: CentOS 7
 Install GlusterFS # yum -y install centos-release-gluster # yum install glusterfs-server  Configure GlusterFS 启动服务进程：

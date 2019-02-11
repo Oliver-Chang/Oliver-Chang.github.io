@@ -20,10 +20,10 @@
     
     <item>
       <title>在 CentOS 7 下安装配置 GlusterFS</title>
-      <link>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</link>
+      <link>https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/</link>
       <pubDate>Thu, 26 Apr 2018 16:44:24 +0000</pubDate>
       
-      <guid>https://blog.oliverch.com/post/glusterfs-configure-in-centos7/</guid>
+      <guid>https://blog.oliverch.com/posts/glusterfs-configure-in-centos7/</guid>
       <description>
 
 &lt;h1 id=&#34;glusterfs&#34;&gt;GLusterFS&lt;/h1&gt;

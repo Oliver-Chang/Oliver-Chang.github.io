@@ -2,7 +2,7 @@ baseURL = "https://blog.oliverch.com"
 languageCode = "zh-cn"
 title = "Oliver's Blog!"
 theme = "m10c"
-paginate = 12
+paginate = 5
 
 [params]
     author = "Oliver Chang"
@@ -13,9 +13,6 @@ paginate = 12
 [[params.social]]
     name = "github"
     url = "https://github.com/Oliver-Chang"
-[[params.social]]
-    name = "email"
-    Email = "mailto:oliverchangnt@gmail.com"
 
 [params.style]
   darkestColor = "#d35050"

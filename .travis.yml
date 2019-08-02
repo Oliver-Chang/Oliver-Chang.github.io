@@ -1,6 +1,6 @@
 language: go
 go:
-    - "1.11.2"
+    - master
 install:
     - go get github.com/gohugoio/hugo
 script:

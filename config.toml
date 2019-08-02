@@ -21,7 +21,7 @@ theme = "hello-friend-ng"
 [languages]
   [languages.en]
     title = "Oliver's Blog!"
-    subtitle = "Just a Blog!""
+    subtitle = "Just a Blog!"
     keywords = ""
     copyright = ""
     readOtherPosts = "Read other posts"

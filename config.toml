@@ -11,7 +11,7 @@ paginate = 12
     subtitle = "I'm here!"
     keywords = "blog,developer,personal"
     cdn_url = "" 
-[[params.social]]
+[params.social]
     url = "http://blog.oliverch.com"
     GitHub = "https://github.com/Oliver-Chang"
     Email = "mailto:oliverchangnt@gmail.com"

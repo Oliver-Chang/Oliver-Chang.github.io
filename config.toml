@@ -1,60 +1,41 @@
-baseurl = "https://blog.oliverch.com"
+baseURL = "https://blog.oliverch.com"
 languageCode = "zh-cn"
-theme = "hello-friend-ng"
+title = "Oliver's Blog!"
+theme = "m10c"
 
+paginate = 12
 [params]
-#  dateform        = "Jan 2, 2019"
-#  dateformShort   = "Jan 2"
-#  dateformNum     = "2006-01-02"
-#  dateformNumTime = "2006-01-02 15:04 -0700"
+    since = 2018
+    author = "Oliver Chang"                           # Author's name
+    avatar = "https://blog-1252092933.cos.ap-chongqing.myqcloud.com/photo_2018-12-07_00-18-35.jpg"
+    subtitle = "I'm here!"
+    keywords = "blog,developer,personal"
+    cdn_url = "" 
+[[params.social]]
+    url = "http://blog.oliverch.com"
+    GitHub = "https://github.com/Oliver-Chang"
+    Email = "mailto:oliverchangnt@gmail.com"
+# Menu links
+[[menu.main]]
+    name = "Blog"
+    weight = 1
+    url  = "/posts/"
+[[menu.main]]
+    name = "About"
+    weight = 2
+    url = "/about/"
+[[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+[[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 3
 
-  # Metadata mostly used in document's head
-  description = "Homepage and blog by Oliver Chang"
-  keywords = "homepage, blog, coder, development, programming"
-  images = [""]
-
-  # Directory name of your blog content (default is `content/posts`)
-  contentTypeName = "posts"
-  # Default theme "light" or "dark"
-  defaultTheme = "dark"
-
-[languages]
-  [languages.en]
-    title = "Oliver's Blog!"
-    subtitle = "Just a Blog!"
-    keywords = ""
-    copyright = ""
-    readOtherPosts = "Read other posts"
-
-    [languages.en.params.logo]
-      logoText = "Oliver Chang"
-      logoHomeLink = "/"
-    # or
-    #
-    #
-    # path = "/img/your-example-logo.svg"
-    # alt = "Your example logo alt text"
-
-	# You can create a language based menu
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "about"
-        name = "About"
-        url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
-
-# And you can even create generic menu
-[menu]
-  [[menu.main]]
-    identifier = "about"
-    name       = "About"
-    url        = "/about"
-  [[menu.main]]
-    identifier = "blog"
-    name       = "Blog"
-    url        = "/posts"
-# #asdasd
-# ###
+[params.style]
+  darkestColor = "#d35050"
+  darkColor = "#212121"
+  lightColor = "#f5e3e0"
+  lightestColor = "#f5f5f5"
+  primaryColor = "#fff"

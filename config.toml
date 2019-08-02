@@ -2,36 +2,20 @@ baseURL = "https://blog.oliverch.com"
 languageCode = "zh-cn"
 title = "Oliver's Blog!"
 theme = "m10c"
-
 paginate = 12
+
 [params]
-    since = 2018
-    author = "Oliver Chang"                           # Author's name
+    author = "Oliver Chang"
     avatar = "https://blog-1252092933.cos.ap-chongqing.myqcloud.com/photo_2018-12-07_00-18-35.jpg"
     subtitle = "I'm here!"
     keywords = "blog,developer,personal"
-    cdn_url = "" 
-[params.social]
-    url = "http://blog.oliverch.com"
-    GitHub = "https://github.com/Oliver-Chang"
+
+[[params.social]]
+    name = "github"
+    url = "https://github.com/Oliver-Chang"
+[[params.social]]
+    name = "email"
     Email = "mailto:oliverchangnt@gmail.com"
-# Menu links
-[[menu.main]]
-    name = "Blog"
-    weight = 1
-    url  = "/posts/"
-[[menu.main]]
-    name = "About"
-    weight = 2
-    url = "/about/"
-[[menu.main]]
-    name = "Categories"
-    url = "/categories/"
-    weight = 3
-[[menu.main]]
-    name = "Tags"
-    url = "/tags/"
-    weight = 3
 
 [params.style]
   darkestColor = "#d35050"

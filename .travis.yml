@@ -4,6 +4,7 @@ go:
 install:
     - wget -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.56.3/hugo_extended_0.56.3_Linux-64bit.deb
     - sudo dpkg -i hugo.deb
+    - sudo apt-get install libstdc++
 script:
     - hugo
 deploy:

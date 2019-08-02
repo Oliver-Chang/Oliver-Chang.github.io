@@ -1,6 +1,5 @@
 baseurl = "https://blog.oliverch.com"
 languageCode = "zh-cn"
-title = "Oliver's Blog!"
 theme = "hello-friend-ng"
 
 [params]
@@ -21,14 +20,14 @@ theme = "hello-friend-ng"
 
 [languages]
   [languages.en]
-    title = "Hello Friend NG"
-    subtitle = "A simple theme for Hugo"
+    title = "Oliver's Blog!"
+    subtitle = "Just a Blog!""
     keywords = ""
     copyright = ""
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "hello friend ng"
+      logoText = "Oliver Chang"
       logoHomeLink = "/"
     # or
     #

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Glusterfs on Oliver&#39;s Blog!</title>
+    <title>GlusterFS on Oliver&#39;s Blog!</title>
     <link>https://blog.oliverch.com/tags/glusterfs/</link>
-    <description>Recent content in Glusterfs on Oliver&#39;s Blog!</description>
+    <description>Recent content in GlusterFS on Oliver&#39;s Blog!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 26 Apr 2018 16:44:24 +0000</lastBuildDate>

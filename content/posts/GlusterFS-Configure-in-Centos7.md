@@ -155,7 +155,7 @@ GLusterFS 通过创建 Volume 来创建一个虚拟存储池，通过 Volume 的
 
 
 
-####Volume info
+#### Volume info
 
 查看 Volume 的信息：
 

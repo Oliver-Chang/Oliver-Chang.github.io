@@ -76,22 +76,22 @@
 
 <h2 id="install-glusterfs">Install GlusterFS</h2>
 
-<pre><code class="language-shell">    # yum -y install centos-release-gluster
-    # yum install glusterfs-server
+<pre><code class="language-shell"># yum -y install centos-release-gluster
+# yum install glusterfs-server
 </code></pre>
 
 <h3 id="configure-glusterfs">Configure GlusterFS</h3>
 
 <p>启动服务进程：</p>
 
-<pre><code class="language-shell">    # systemctl enable glusterd.service
-    # systemctl start glusterd.service
+<pre><code class="language-shell"># systemctl enable glusterd.service
+# systemctl start glusterd.service
 </code></pre>
 
 <p>GLusterFS 节点之间通信用到了 TCP 端口 24007-24008，所以启用所需端口：</p>
 
-<pre><code class="language-shell">    # firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent
-    # firewall-cmd --reload
+<pre><code class="language-shell"># firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent
+# firewall-cmd --reload
 </code></pre>
 
 <p>或者选择关闭防火墙。</p>
@@ -141,14 +141,14 @@
 
 <p>添加 Peer 需要指定该节点的 IP 或者 HOSTNAME。</p>
 
-<pre><code class="language-shell">    $ gluster peer probe { &lt;HOSTNAME&gt; | &lt;IP-address&gt; }
+<pre><code class="language-shell">$ gluster peer probe { &lt;HOSTNAME&gt; | &lt;IP-address&gt; }
 </code></pre>
 
 <p>例如在 node1 上：</p>
 
-<pre><code class="language-shell">    $ gluster peer probe node2
-    $ gluster peer probe node3
-    $ gluster peer probe node4
+<pre><code class="language-shell">$ gluster peer probe node2
+$ gluster peer probe node3
+$ gluster peer probe node4
 </code></pre>
 
 <p>这样就能将 node1、node2、node3 和 node4 四台服务器连接，组成一个服务器集群。</p>
@@ -157,19 +157,19 @@
 
 <p>查询集群中的节点信息：</p>
 
-<pre><code class="language-shell">    $ gluster peer status
+<pre><code class="language-shell">$ gluster peer status
 </code></pre>
 
 <h4 id="peer-detach">Peer detach</h4>
 
 <p>移除 Peer 需要指定该节点的 IP 或者 HOSTNAME。</p>
 
-<pre><code class="language-shell">    $ gluster peer detach { &lt;HOSTNAME&gt; | &lt;IP-address&gt; } [force] 
+<pre><code class="language-shell">$ gluster peer detach { &lt;HOSTNAME&gt; | &lt;IP-address&gt; } [force] 
 </code></pre>
 
 <p>例如在 node1 移除 node2：</p>
 
-<pre><code class="language-shell">    $ gluster peer probe node2
+<pre><code class="language-shell">$ gluster peer probe node2
 </code></pre>
 
 <p>不能在当前服务器从集群中移除当前服务器。</p>
@@ -182,7 +182,7 @@
 
 <p>创建卷需要指定卷的名字，类型和 Brick（Brcik 是指服务器上的一个目录，后端实际存储的目录）。</p>
 
-<pre><code class="language-shell">    $ gluster volume create &lt;NEW-VOLNAME&gt; [stripe &lt;COUNT&gt;] [replica &lt;COUNT&gt; [arbiter &lt;COUNT&gt;]] [disperse [&lt;COUNT&gt;]] [disperse-data &lt;COUNT&gt;] [redundancy &lt;COUNT&gt;] [transport &lt;tcp|rdma|tcp,rdma&gt;] &lt;NEW-BRICK&gt;?&lt;vg_name&gt;... [force]
+<pre><code class="language-shell">$ gluster volume create &lt;NEW-VOLNAME&gt; [stripe &lt;COUNT&gt;] [replica &lt;COUNT&gt; [arbiter &lt;COUNT&gt;]] [disperse [&lt;COUNT&gt;]] [disperse-data &lt;COUNT&gt;] [redundancy &lt;COUNT&gt;] [transport &lt;tcp|rdma|tcp,rdma&gt;] &lt;NEW-BRICK&gt;?&lt;vg_name&gt;... [force]
 </code></pre>
 
 <p>不同类型的 Volume 对 Brick 的数量也有不同的要求。</p>
@@ -222,7 +222,7 @@
 
 <p>创建一个 replica 类型的 Volume，其 COUNT 至少为2 ,至少需要指定 2 个 Brick</p>
 
-<pre><code class="language-shell">    $ gluster volume create voltest1 replica 2 node1:/bricks/brick01 node2:/bricks/brick01 node3::/bricks/brick01 node4:/bricks/brick01
+<pre><code class="language-shell">$ gluster volume create voltest1 replica 2 node1:/bricks/brick01 node2:/bricks/brick01 node3::/bricks/brick01 node4:/bricks/brick01
 </code></pre>
 
 <p>该类型 volume 可以在存储文件的时候，在服务器保存一份该文件的副本。当然 GlusterFS 还有其他很多类型的 volume 这里就不一一介绍了。</p>
@@ -231,21 +231,21 @@
 
 <p>查看 Volume 的信息：</p>
 
-<pre><code class="language-shell">    $ gluster volume info
+<pre><code class="language-shell">$ gluster volume info
 </code></pre>
 
 <h4 id="volume-status">Volume status</h4>
 
 <p>查看 Volume 状态：</p>
 
-<pre><code class="language-shell">    $ gluster volume status
+<pre><code class="language-shell">$ gluster volume status
 </code></pre>
 
 <h4 id="volume-delete">Volume delete</h4>
 
 <p>删除 Volume：</p>
 
-<pre><code class="language-shell">    $ gluster volume delete &lt;VOLNAME&gt;
+<pre><code class="language-shell">$ gluster volume delete &lt;VOLNAME&gt;
 </code></pre>
 
 <h3 id="brick-操作">Brick 操作</h3>
@@ -256,7 +256,7 @@
 
 <p>命令：</p>
 
-<pre><code class="language-shell">    $ gluster volume add-brick &lt;VOLNAME&gt; [&lt;stripe|replica&gt; &lt;COUNT&gt; [arbiter &lt;COUNT&gt;]] &lt;NEW-BRICK&gt; ... [force]
+<pre><code class="language-shell">$ gluster volume add-brick &lt;VOLNAME&gt; [&lt;stripe|replica&gt; &lt;COUNT&gt; [arbiter &lt;COUNT&gt;]] &lt;NEW-BRICK&gt; ... [force]
 </code></pre>
 
 <p>一次添加 Brick 的数量要根据 Volume 的类型来决定。</p>
@@ -265,55 +265,55 @@
 
 <p>要将 <code>node5/bricks/brick01</code>  <code>node6:/bricks/brick01</code>加入到 <code>voltest1</code>  Volume 中</p>
 
-<pre><code class="language-shell">    $ gluster volume add-brick voltest1 node5/bricks/brick01 node6:/bricks/brick01
+<pre><code class="language-shell">$ gluster volume add-brick voltest1 node5/bricks/brick01 node6:/bricks/brick01
 </code></pre>
 
 <h4 id="rebalance">Rebalance</h4>
 
 <p>这时需要重新分配所保存文件的位置，这样可以确保每一个 Brick 都会被分配到文件，而不会过于集中在特定某一个 Brick。</p>
 
-<pre><code class="language-shell">    $ gluster volume rebalance &lt;VOLNAME&gt; {{fix-layout start} | {start [force]|stop|status}}
+<pre><code class="language-shell">$ gluster volume rebalance &lt;VOLNAME&gt; {{fix-layout start} | {start [force]|stop|status}}
 </code></pre>
 
 <p>查看 rebalance 状态</p>
 
-<pre><code class="language-shell">    $ gluster volume rebalance voltest1 status
+<pre><code class="language-shell">$ gluster volume rebalance voltest1 status
 </code></pre>
 
 <h4 id="brick-替换">Brick 替换</h4>
 
 <p>命令：</p>
 
-<pre><code class="language-shell">    $ gluster volume replace-brick &lt;VOLNAME&gt; &lt;SOURCE-BRICK&gt; &lt;NEW-BRICK&gt; {commit force}
+<pre><code class="language-shell">$ gluster volume replace-brick &lt;VOLNAME&gt; &lt;SOURCE-BRICK&gt; &lt;NEW-BRICK&gt; {commit force}
 </code></pre>
 
 <p>假设名称为 <code>voltest1</code> 的 Volume，使用 <code>node7:/bricks/brick01</code>替换 <code>node1:/bricks/birck01</code></p>
 
-<pre><code class="language-shell">    $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node7:/bricks/brick01 start
+<pre><code class="language-shell">$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node7:/bricks/brick01 start
 </code></pre>
 
 <p>这时可以查看替换的状态</p>
 
-<pre><code class="language-shell">    $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 status
+<pre><code class="language-shell">$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 status
 </code></pre>
 
 <p>最后 commit 确认移除旧的 Brick</p>
 
-<pre><code class="language-shell">    $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 commit
+<pre><code class="language-shell">$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 commit
 </code></pre>
 
 <h4 id="brick-移除">Brick 移除</h4>
 
 <p>命令：</p>
 
-<pre><code class="language-shell">    $ gluster volume remove-brick &lt;VOLNAME&gt; [replica &lt;COUNT&gt;] &lt;BRICK&gt; ... &lt;start|stop|status|commit|force&gt;
+<pre><code class="language-shell">$ gluster volume remove-brick &lt;VOLNAME&gt; [replica &lt;COUNT&gt;] &lt;BRICK&gt; ... &lt;start|stop|status|commit|force&gt;
 </code></pre>
 
 <p>移除 Brick 的数量也是由 Volume 的类型决定，</p>
 
 <p>假设移除 <code>voltest1</code> 类型为 replica 2 的 Brick 那么移除的 Brick 数为 replica 的整数倍。</p>
 
-<pre><code class="language-shell">    $ gluster volume remove-brick voltest1 node1:/bricks/brick01 node2:/bricks/brick01
+<pre><code class="language-shell">$ gluster volume remove-brick voltest1 node1:/bricks/brick01 node2:/bricks/brick01
 </code></pre>
 
 <h3 id="snapshot-操作">Snapshot 操作</h3>
@@ -326,28 +326,28 @@
 
 <p>命令：</p>
 
-<pre><code class="language-shell">    $ gluster snapshot create &lt;snapname&gt; &lt;volname&gt; [no-timestamp] [description &lt;description&gt;] [force]
+<pre><code class="language-shell">$ gluster snapshot create &lt;snapname&gt; &lt;volname&gt; [no-timestamp] [description &lt;description&gt;] [force]
 </code></pre>
 
 <h4 id="snapshot-activate">Snapshot activate</h4>
 
 <p>在创建后需要激活才能使用：</p>
 
-<pre><code class="language-shell">    $ gluster snapshot activate &lt;snapname&gt; [force]
+<pre><code class="language-shell">$ gluster snapshot activate &lt;snapname&gt; [force]
 </code></pre>
 
 <h4 id="snapshot-info">Snapshot info</h4>
 
 <p>查看快照信息：</p>
 
-<pre><code class="language-shell">    $ gluster snapshot info
+<pre><code class="language-shell">$ gluster snapshot info
 </code></pre>
 
 <h4 id="snapshot-restore">Snapshot restore</h4>
 
 <p>GlusterFS 可以将 Volume 数据恢复到快照时的状态，但进行操作时必须停用 Volume，完成后重启。</p>
 
-<pre><code class="language-shell">    $ gluster snapshot restore &lt;snapname&gt;
+<pre><code class="language-shell">$ gluster snapshot restore &lt;snapname&gt;
 </code></pre>
 
 <p>虽然这样不影响工作，但会照成 Brick 位置的变更，若非必要，不要直接使用Snapshot 还原整个Volume。</p>
@@ -356,7 +356,7 @@
 
 <p>GlusterFS 提供从一个现有的快照，创建一个新的 Volume。</p>
 
-<pre><code class="language-shell">    $ gluster snapshot clone &lt;cloname&gt; &lt;snapname&gt;
+<pre><code class="language-shell">$ gluster snapshot clone &lt;cloname&gt; &lt;snapname&gt;
 </code></pre>
 
 <h2 id="glusterfs-client">GlusterFS Client</h2>
@@ -367,10 +367,12 @@
 
 <p>为 Glusterfs、Samba 和 NFS 开启防火墙。</p>
 
-<pre><code class="language-shell">    # firewall-cmd --zone=public --add-service=nfs --add-service=samba --add-service=samba-client --permanent
-    # firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp \
+<pre><code class="language-shell"># firewall-cmd --zone=public --add-service=nfs --add-service=samba --add-service=samba-client --permanent
+
+# firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp \
 --add-port=38465-38469/tcp --add-port=631/tcp --add-port=111/udp --add-port=963/udp --add-port=49152-49251/tcp  --permanent
-    # firewall-cmd --reload
+
+# firewall-cmd --reload
 </code></pre>
 
 <p>当然也可选择关闭防火墙。</p>
@@ -379,12 +381,12 @@
 
 <p>安装 GLusterfs client：</p>
 
-<pre><code class="language-shell">    # yum install glusterfs glusterfs-fuse attr -y
+<pre><code class="language-shell"># yum install glusterfs glusterfs-fuse attr -y
 </code></pre>
 
 <p>挂载:</p>
 
-<pre><code class="language-shell">    # mount -t glusterfs node1:/glustervol1 /mnt/
+<pre><code class="language-shell"># mount -t glusterfs node1:/glustervol1 /mnt/
 </code></pre>
 
 <p>node1 为一个服务器节点。</p>
@@ -393,15 +395,15 @@
 
 <p>安装：</p>
 
-<pre><code class="language-shell">    # yum install samba samba-client samba-common samba-vfs-glusterfs selinux-policy-targeted -y
+<pre><code class="language-shell"># yum install samba samba-client samba-common samba-vfs-glusterfs selinux-policy-targeted -y
 </code></pre>
 
 <p>启动服务：</p>
 
-<pre><code class="language-shell">    # systemctl start smb.service
-    # systemctl enable smb.service
-    # systemctl start nmb.service
-    # systemctl enable nmb.service
+<pre><code class="language-shell"># systemctl start smb.service
+# systemctl enable smb.service
+# systemctl start nmb.service
+# systemctl enable nmb.service
 </code></pre>
 
 <p>在每个服务器端，修改 <em>/etc/samba/smb.conf</em> 文件内的 GlusterFS 已创建 Volume 的配置：</p>
@@ -435,15 +437,15 @@ kernel share modes = No
 
 <p>为了能够访问 Samba 需要创建用户，并设置密码。</p>
 
-<pre><code class="language-shell">    # smbpasswd -a sambauser
+<pre><code class="language-shell"># smbpasswd -a sambauser
 </code></pre>
 
 <p>sambauser 是一个用户名，按需要进行创建。</p>
 
 <p>设置 SELinux 运行 Samba 共享：</p>
 
-<pre><code class="language-shell">    # setsebool -P samba_share_fusefs on
-    # setsebool -P samba_load_libgfapi on
+<pre><code class="language-shell"># setsebool -P samba_share_fusefs on
+# setsebool -P samba_load_libgfapi on
 </code></pre>
 
 <p>当然也可以选择关闭 SELinux</p>
@@ -471,13 +473,13 @@ kernel share modes = No
 
 <p>需要开启 RPC 服务：</p>
 
-<pre><code class="language-shell">    # systemctl enable rpcbind
-    # systemctl start rpcbind
+<pre><code class="language-shell"># systemctl enable rpcbind
+# systemctl start rpcbind
 </code></pre>
 
 <p>挂载：</p>
 
-<pre><code class="language-shell">    # mount -t nfs gluster1.example.com:/glustervol1 /mnt/
+<pre><code class="language-shell"># mount -t nfs gluster1.example.com:/glustervol1 /mnt/
 </code></pre>
 
 <h2 id="block-storage">Block Storage</h2>

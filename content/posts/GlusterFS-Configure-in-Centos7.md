@@ -21,8 +21,8 @@ OS: CentOS 7
 ## Install GlusterFS
 
 ```shell
-# yum -y install centos-release-gluster
-# yum install glusterfs-server
+    # yum -y install centos-release-gluster
+    # yum install glusterfs-server
 ```
 
 
@@ -32,8 +32,8 @@ OS: CentOS 7
 启动服务进程：
 
 ```shell
-# systemctl enable glusterd.service
-# systemctl start glusterd.service
+    # systemctl enable glusterd.service
+    # systemctl start glusterd.service
 ```
 
 
@@ -41,8 +41,8 @@ OS: CentOS 7
 GLusterFS 节点之间通信用到了 TCP 端口 24007-24008，所以启用所需端口：
 
 ```shell
-# firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent
-# firewall-cmd --reload
+    # firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent
+    # firewall-cmd --reload
 ```
 
 或者选择关闭防火墙。
@@ -75,15 +75,15 @@ GlusterFS 通过添加 Peer 来创建集群。
 添加 Peer 需要指定该节点的 IP 或者 HOSTNAME。
 
 ```shell
-$ gluster peer probe { <HOSTNAME> | <IP-address> }
+    $ gluster peer probe { <HOSTNAME> | <IP-address> }
 ```
 
 例如在 node1 上：
 
 ```shell
-$ gluster peer probe node2
-$ gluster peer probe node3
-$ gluster peer probe node4
+    $ gluster peer probe node2
+    $ gluster peer probe node3
+    $ gluster peer probe node4
 ```
 
 这样就能将 node1、node2、node3 和 node4 四台服务器连接，组成一个服务器集群。
@@ -95,7 +95,7 @@ $ gluster peer probe node4
 查询集群中的节点信息：
 
 ```shell
-$ gluster peer status
+    $ gluster peer status
 ```
 
 
@@ -105,7 +105,7 @@ $ gluster peer status
 移除 Peer 需要指定该节点的 IP 或者 HOSTNAME。
 
 ```shell
-$ gluster peer detach { <HOSTNAME> | <IP-address> } [force] 
+    $ gluster peer detach { <HOSTNAME> | <IP-address> } [force] 
 ```
 
 
@@ -113,7 +113,7 @@ $ gluster peer detach { <HOSTNAME> | <IP-address> } [force]
 例如在 node1 移除 node2：
 
 ```shell
-$ gluster peer probe node2
+    $ gluster peer probe node2
 ```
 
 不能在当前服务器从集群中移除当前服务器。
@@ -131,7 +131,7 @@ GLusterFS 通过创建 Volume 来创建一个虚拟存储池，通过 Volume 的
 创建卷需要指定卷的名字，类型和 Brick（Brcik 是指服务器上的一个目录，后端实际存储的目录）。
 
 ```shell
-$ gluster volume create <NEW-VOLNAME> [stripe <COUNT>] [replica <COUNT> [arbiter <COUNT>]] [disperse [<COUNT>]] [disperse-data <COUNT>] [redundancy <COUNT>] [transport <tcp|rdma|tcp,rdma>] <NEW-BRICK>?<vg_name>... [force]
+    $ gluster volume create <NEW-VOLNAME> [stripe <COUNT>] [replica <COUNT> [arbiter <COUNT>]] [disperse [<COUNT>]] [disperse-data <COUNT>] [redundancy <COUNT>] [transport <tcp|rdma|tcp,rdma>] <NEW-BRICK>?<vg_name>... [force]
 ```
 
 不同类型的 Volume 对 Brick 的数量也有不同的要求。
@@ -148,7 +148,7 @@ $ gluster volume create <NEW-VOLNAME> [stripe <COUNT>] [replica <COUNT> [arbiter
 创建一个 replica 类型的 Volume，其 COUNT 至少为2 ,至少需要指定 2 个 Brick
 
 ```shell
-$ gluster volume create voltest1 replica 2 node1:/bricks/brick01 node2:/bricks/brick01 node3::/bricks/brick01 node4:/bricks/brick01
+    $ gluster volume create voltest1 replica 2 node1:/bricks/brick01 node2:/bricks/brick01 node3::/bricks/brick01 node4:/bricks/brick01
 ```
 
 该类型 volume 可以在存储文件的时候，在服务器保存一份该文件的副本。当然 GlusterFS 还有其他很多类型的 volume 这里就不一一介绍了。
@@ -160,7 +160,7 @@ $ gluster volume create voltest1 replica 2 node1:/bricks/brick01 node2:/bricks/b
 查看 Volume 的信息：
 
 ```shell
-$ gluster volume info
+    $ gluster volume info
 ```
 
 
@@ -170,7 +170,7 @@ $ gluster volume info
 查看 Volume 状态：
 
 ```shell
-$ gluster volume status
+    $ gluster volume status
 ```
 
 
@@ -180,7 +180,7 @@ $ gluster volume status
 删除 Volume：
 
 ```shell
-$ gluster volume delete <VOLNAME>
+    $ gluster volume delete <VOLNAME>
 ```
 
 
@@ -196,7 +196,7 @@ $ gluster volume delete <VOLNAME>
 命令：
 
 ```shell
-$ gluster volume add-brick <VOLNAME> [<stripe|replica> <COUNT> [arbiter <COUNT>]] <NEW-BRICK> ... [force]
+    $ gluster volume add-brick <VOLNAME> [<stripe|replica> <COUNT> [arbiter <COUNT>]] <NEW-BRICK> ... [force]
 ```
 
 
@@ -208,7 +208,7 @@ $ gluster volume add-brick <VOLNAME> [<stripe|replica> <COUNT> [arbiter <COUNT>]
 要将 `node5/bricks/brick01`  `node6:/bricks/brick01`加入到 `voltest1`  Volume 中 
 
 ```shell
-$ gluster volume add-brick voltest1 node5/bricks/brick01 node6:/bricks/brick01
+    $ gluster volume add-brick voltest1 node5/bricks/brick01 node6:/bricks/brick01
 ```
 
 
@@ -218,7 +218,7 @@ $ gluster volume add-brick voltest1 node5/bricks/brick01 node6:/bricks/brick01
 这时需要重新分配所保存文件的位置，这样可以确保每一个 Brick 都会被分配到文件，而不会过于集中在特定某一个 Brick。
 
 ```shell
-$ gluster volume rebalance <VOLNAME> {{fix-layout start} | {start [force]|stop|status}}
+    $ gluster volume rebalance <VOLNAME> {{fix-layout start} | {start [force]|stop|status}}
 ```
 
 
@@ -226,7 +226,7 @@ $ gluster volume rebalance <VOLNAME> {{fix-layout start} | {start [force]|stop|s
 查看 rebalance 状态
 
 ```shell
-$ gluster volume rebalance voltest1 status
+    $ gluster volume rebalance voltest1 status
 ```
 
 
@@ -236,7 +236,7 @@ $ gluster volume rebalance voltest1 status
 命令：
 
 ```shell
-$ gluster volume replace-brick <VOLNAME> <SOURCE-BRICK> <NEW-BRICK> {commit force}
+    $ gluster volume replace-brick <VOLNAME> <SOURCE-BRICK> <NEW-BRICK> {commit force}
 ```
 
 
@@ -244,7 +244,7 @@ $ gluster volume replace-brick <VOLNAME> <SOURCE-BRICK> <NEW-BRICK> {commit forc
 假设名称为 `voltest1` 的 Volume，使用 `node7:/bricks/brick01`替换 `node1:/bricks/birck01`
 
 ```shell
-$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node7:/bricks/brick01 start
+    $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node7:/bricks/brick01 start
 ```
 
 
@@ -252,7 +252,7 @@ $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node7:/bricks/bric
 这时可以查看替换的状态
 
 ```shell
-$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 status
+    $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 status
 ```
 
 
@@ -260,7 +260,7 @@ $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/bric
 最后 commit 确认移除旧的 Brick
 
 ```shell
-$ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 commit
+    $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/brick01 commit
 ```
 
 
@@ -270,7 +270,7 @@ $ gluster volume replace-brick voltest1 node1:/bricks/brick01 node5:/bricks/bric
 命令：
 
 ```shell
-$ gluster volume remove-brick <VOLNAME> [replica <COUNT>] <BRICK> ... <start|stop|status|commit|force>
+    $ gluster volume remove-brick <VOLNAME> [replica <COUNT>] <BRICK> ... <start|stop|status|commit|force>
 ```
 
 
@@ -280,7 +280,7 @@ $ gluster volume remove-brick <VOLNAME> [replica <COUNT>] <BRICK> ... <start|sto
 假设移除 `voltest1` 类型为 replica 2 的 Brick 那么移除的 Brick 数为 replica 的整数倍。
 
 ```shell
-$ gluster volume remove-brick voltest1 node1:/bricks/brick01 node2:/bricks/brick01
+    $ gluster volume remove-brick voltest1 node1:/bricks/brick01 node2:/bricks/brick01
 ```
 
 
@@ -298,7 +298,7 @@ Gluster 使用 LVM 的Snapshot 完成快照功能，也就是说您的 Brick 必
 命令：
 
 ```shell
-$ gluster snapshot create <snapname> <volname> [no-timestamp] [description <description>] [force]
+    $ gluster snapshot create <snapname> <volname> [no-timestamp] [description <description>] [force]
 ```
 
 
@@ -308,7 +308,7 @@ $ gluster snapshot create <snapname> <volname> [no-timestamp] [description <desc
 在创建后需要激活才能使用：
 
 ```shell
-$ gluster snapshot activate <snapname> [force]
+    $ gluster snapshot activate <snapname> [force]
 ```
 
 
@@ -318,7 +318,7 @@ $ gluster snapshot activate <snapname> [force]
 查看快照信息：
 
 ```shell
-$ gluster snapshot info
+    $ gluster snapshot info
 ```
 
 
@@ -328,7 +328,7 @@ $ gluster snapshot info
 GlusterFS 可以将 Volume 数据恢复到快照时的状态，但进行操作时必须停用 Volume，完成后重启。
 
 ```shell
-$ gluster snapshot restore <snapname>
+    $ gluster snapshot restore <snapname>
 ```
 
 虽然这样不影响工作，但会照成 Brick 位置的变更，若非必要，不要直接使用Snapshot 还原整个Volume。
@@ -340,7 +340,7 @@ $ gluster snapshot restore <snapname>
 GlusterFS 提供从一个现有的快照，创建一个新的 Volume。
 
 ```shell
-$ gluster snapshot clone <cloname> <snapname>
+    $ gluster snapshot clone <cloname> <snapname>
 ```
 
 
@@ -356,12 +356,10 @@ GlusterFS 可以通过自己的客户端 Glusterfs 或者 Samba、NFS 来访问�
 为 Glusterfs、Samba 和 NFS 开启防火墙。
 
 ```shell
-# firewall-cmd --zone=public --add-service=nfs --add-service=samba --add-service=samba-client --permanent
-
-# firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp \
+    # firewall-cmd --zone=public --add-service=nfs --add-service=samba --add-service=samba-client --permanent
+    # firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp \
 --add-port=38465-38469/tcp --add-port=631/tcp --add-port=111/udp --add-port=963/udp --add-port=49152-49251/tcp  --permanent
-
-# firewall-cmd --reload
+    # firewall-cmd --reload
 ```
 
 当然也可选择关闭防火墙。
@@ -373,7 +371,7 @@ GlusterFS 可以通过自己的客户端 Glusterfs 或者 Samba、NFS 来访问�
 安装 GLusterfs client：
 
 ```shell
-# yum install glusterfs glusterfs-fuse attr -y
+    # yum install glusterfs glusterfs-fuse attr -y
 ```
 
 
@@ -381,9 +379,9 @@ GlusterFS 可以通过自己的客户端 Glusterfs 或者 Samba、NFS 来访问�
 挂载:
 
 ```shell
-# mount -t glusterfs node1:/glustervol1 /mnt/
+    # mount -t glusterfs node1:/glustervol1 /mnt/
 ```
-
+ 
 node1 为一个服务器节点。
 
 
@@ -393,7 +391,7 @@ node1 为一个服务器节点。
 安装：
 
 ```shell
-# yum install samba samba-client samba-common samba-vfs-glusterfs selinux-policy-targeted -y
+    # yum install samba samba-client samba-common samba-vfs-glusterfs selinux-policy-targeted -y
 ```
 
 
@@ -401,10 +399,10 @@ node1 为一个服务器节点。
 启动服务：
 
 ```shell
-# systemctl start smb.service
-# systemctl enable smb.service
-# systemctl start nmb.service
-# systemctl enable nmb.service
+    # systemctl start smb.service
+    # systemctl enable smb.service
+    # systemctl start nmb.service
+    # systemctl enable nmb.service
 ```
 
 
@@ -445,7 +443,7 @@ kernel share modes = No
 为了能够访问 Samba 需要创建用户，并设置密码。
 
 ```shell
-# smbpasswd -a sambauser
+    # smbpasswd -a sambauser
 ```
 
 sambauser 是一个用户名，按需要进行创建。
@@ -455,8 +453,8 @@ sambauser 是一个用户名，按需要进行创建。
 设置 SELinux 运行 Samba 共享：
 
 ```shell
-# setsebool -P samba_share_fusefs on
-# setsebool -P samba_load_libgfapi on
+    # setsebool -P samba_share_fusefs on
+    # setsebool -P samba_load_libgfapi on
 ```
 
 
@@ -494,8 +492,8 @@ SELINUX=disabled
 需要开启 RPC 服务：
 
 ```shell
-# systemctl enable rpcbind
-# systemctl start rpcbind
+    # systemctl enable rpcbind
+    # systemctl start rpcbind
 ```
 
 
@@ -503,7 +501,7 @@ SELINUX=disabled
 挂载：
 
 ```shell
-# mount -t nfs gluster1.example.com:/glustervol1 /mnt/
+    # mount -t nfs gluster1.example.com:/glustervol1 /mnt/
 ```
 
 
@@ -526,5 +524,3 @@ SELINUX=disabled
 >
 > Gluster-Storage_GitBook: [http://www.l-penguin.idv.tw/book/Gluster-Storage_GitBook/](http://www.l-penguin.idv.tw/book/Gluster-Storage_GitBook/)
 >
-> 
-

@@ -1,7 +1,7 @@
-baseURL = "https://blog.oliverch.com"
+baseurl = "https://blog.oliverch.com"
 languageCode = "zh-cn"
 title = "Oliver's Blog!"
-theme = "m10c"
+theme = "terminal"
 paginate = 5
 
 [params]
@@ -14,10 +14,36 @@ paginate = 5
     name = "github"
     url = "https://github.com/Oliver-Chang"
 
-# Brown theme
-[params.style]
-    darkestColor = "#463625"
-    darkColor = "#2a3738"
-    primaryColor = "#eeee6a"
-    lightColor = "#96a879"
-    lightestColor = "#ffffff"
+[params]
+  # dir name of your blog content (default is `content/posts`)
+  contentTypeName = "posts"
+  # ["orange", "blue", "red", "green", "pink"]
+  themeColor = "orange"
+  # if you set this to 0, only submenu trigger will be visible
+  showMenuItems = 2
+  # set theme to full screen width
+  fullWidthTheme = false
+  # center theme with default width
+  centerTheme = false
+  # set a custom favicon (default is a `themeColor` square)
+  # favicon = "favicon.ico"
+
+[languages]
+  [languages.cn]
+    title = "Terminal"
+    subtitle = "A simple, retro theme for Hugo"
+    keywords = ""
+    copyright = ""
+    menuMore = "Show more"
+    readMore = "Read more"
+    readOtherPosts = "Read other posts"
+
+    [languages.cn.params.logo]
+      logoText = "Terminal"
+      logoHomeLink = "/"
+
+    [languages.cn.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about"

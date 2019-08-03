@@ -4,12 +4,6 @@ title = "Oliver's Blog!"
 theme = "terminal"
 paginate = 5
 
-[params]
-    author = "Oliver Chang"
-    avatar = "https://blog-1252092933.cos.ap-chongqing.myqcloud.com/photo_2018-12-07_00-18-35.jpg"
-    subtitle = "I'm here!"
-    keywords = "blog,developer,personal"
-
 [[params.social]]
     name = "github"
     url = "https://github.com/Oliver-Chang"
@@ -27,6 +21,10 @@ paginate = 5
   centerTheme = false
   # set a custom favicon (default is a `themeColor` square)
   # favicon = "favicon.ico"
+    author = "Oliver Chang"
+    avatar = "https://blog-1252092933.cos.ap-chongqing.myqcloud.com/photo_2018-12-07_00-18-35.jpg"
+    subtitle = "I'm here!"
+    keywords = "blog,developer,personal"
 
 [languages]
   [languages.cn]

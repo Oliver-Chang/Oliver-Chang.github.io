@@ -213,22 +213,22 @@ disqus:
 # enable: false
 # uid:
 
-gitment:
-  enable: true
-  owner: Oliver-Chang
-  repo: Oliver-Chang.github.io
+#gitment:
+#  enable: true
+#  owner: Oliver-Chang
+#  repo: Oliver-Chang.github.io
+#  client_id: 7c6f560166cd44fa051b
+#  client_secret: 67b66c238a975745184fdcdc10083ca4eebac39b
+#  lazy: true
+#  redirect_uri: https://blog.oliverch.com
+
+gitalk:
+  enable: false
   client_id: 7c6f560166cd44fa051b
   client_secret: 67b66c238a975745184fdcdc10083ca4eebac39b
-  lazy: true
-  redirect_uri: https://blog.oliverch.com
-
-# gitalk:
-#   enable: false
-#   client_id:
-#   client_secret:
-#   repo:
-#   owner:
-#   admin:
+  repo: Oliver-Chang.github.io
+  owner: Oliver-Chang
+  admin: Oliver-Chang
 
 # valine comment system. https://valine.js.org
 # valine:

@@ -31,6 +31,9 @@ before_install:
   - npm install -g hexo-cli
 install:
   - npm install hexo-renderer-jade hexo-renderer-stylus --save
+  - npm install gitment --save
+  - npm install hexo-generator-feed --save
+  - npm install hexo-generator-search --save
   - npm install
 
 script:

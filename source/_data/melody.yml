@@ -58,6 +58,7 @@ code_word_wrap: true
 
 social:
   github fa: https://github.com/Oliver-Chang
+  rss fa: /atom.xml
   #icon_name fab: url
 
 # Algolia search
@@ -71,7 +72,7 @@ algolia_search:
 # Please see doc for more details: https://molunerfinn.com/hexo-theme-melody-doc/third-party-support.html#local-search
 # ---------------
 local_search:
-  enable: false
+  enable: true
 
 # MathJax
 # Please see doc for more details: https://molunerfinn.com/hexo-theme-melody-doc/third-party-support.html#mathjax

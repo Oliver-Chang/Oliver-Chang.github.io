@@ -3,6 +3,7 @@ title: 在 CentOS 7 下安装配置 GlusterFS
 tags: ["Linux","Centos","GlusterFS"]
 date: 2018-04-26 16:44:24
 categories: ["GlusterFS"]
+top_img: 
 description: 在 CentOS 7 下 GlusterFS 搭建配置及使用。
 ---
 

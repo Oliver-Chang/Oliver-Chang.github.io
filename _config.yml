@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: $Title
+title: Oliver's Blog
 subtitle: ''
 description: ''
 keywords:
 author: Oliver Chang
-language: zh-Hans
+language: en
 timezone: ''
 
 # URL

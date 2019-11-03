@@ -1,19 +1,50 @@
-language: go
-go:
-    - master
+# language: go
+# go:
+#     - master
+# install:
+#     - go get -u github.com/gohugoio/hugo
+# script:
+#     - hugo
+# deploy:
+#     provider: pages
+#     skip-cleanup: true
+#     github-token: $GITHUB_TOKEN
+#     email: $GITHUB_EMAIL
+#     name: $GITHUB_USERNAME
+#     verbose: true
+#     keep-history: true
+#     local-dir: public
+#     target_branch: master  # branch contains blog content
+#     on:
+#       branch: hugo
+
+language: node_js
+node_js:
+  - 12
+cache: 
+  directories:
+    - node_modules
+branches:
+  only:
+    - hexo
+before_install:
+  - npm install -g hexo-cli
 install:
-    - go get -u github.com/gohugoio/hugo
+  - npm install hexo-renderer-jade hexo-renderer-stylus --save
+  - npm install
+
 script:
-    - hugo
+  - hexo clean
+  - hexo generate
+
 deploy:
-    provider: pages
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    email: $GITHUB_EMAIL
-    name: $GITHUB_USERNAME
-    verbose: true
-    keep-history: true
-    local-dir: public
-    target_branch: master  # branch contains blog content
-    on:
-      branch: hugo
+  provider: pages
+  email: $GITHUB_EMAIL
+  name: $GITHUB_USERNAME
+  github_token: $GITHUB_TOKEN
+  skip_cleanup: true
+  keep_history: true
+  local_dir: public
+  target_branch: master
+  on:
+    branch: hexo

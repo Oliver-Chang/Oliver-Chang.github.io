@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Oliver&#39;s Blog</title>
+  <icon>http://blog.oliverch.com/icon.png</icon>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.oliverch.com/"/>
+  <updated>2019-11-03T16:46:08.396Z</updated>
+  <id>http://blog.oliverch.com/</id>
+  
+  <author>
+    <name>Oliver Chang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 CentOS 7 下安装配置 GlusterFS</title>
+    <link href="http://blog.oliverch.com/2018/04/26/GlusterFS-Configure-in-Centos7/"/>
+    <id>http://blog.oliverch.com/2018/04/26/GlusterFS-Configure-in-Centos7/</id>
+    <published>2018-04-26T16:44:24.000Z</published>
+    <updated>2019-11-03T16:46:08.396Z</updated>
+    
+    <summary type="html">
+    
+      在 CentOS 7 下 GlusterFS 搭建配置及使用。
+    
+    </summary>
+    
+    
+      <category term="GlusterFS" scheme="http://blog.oliverch.com/categories/GlusterFS/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.oliverch.com/tags/Linux/"/>
+    
+      <category term="Centos" scheme="http://blog.oliverch.com/tags/Centos/"/>
+    
+      <category term="GlusterFS" scheme="http://blog.oliverch.com/tags/GlusterFS/"/>
+    
+  </entry>
+  
+</feed>

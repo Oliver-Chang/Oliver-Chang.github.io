@@ -51,3 +51,11 @@ deploy:
   target_branch: master
   on:
     branch: hexo
+
+notifications:
+  email:
+    recipients:
+      - oliverchangnt@gmail.com
+    on_success: change
+    on_failure: always
+

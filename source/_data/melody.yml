@@ -223,7 +223,7 @@ disqus:
 #  redirect_uri: https://blog.oliverch.com
 
 gitalk:
-  enable: false
+  enable: true
   client_id: 7c6f560166cd44fa051b
   client_secret: 67b66c238a975745184fdcdc10083ca4eebac39b
   repo: Oliver-Chang.github.io

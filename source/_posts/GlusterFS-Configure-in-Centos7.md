@@ -7,7 +7,7 @@ top_img:
 description: 在 CentOS 7 下 GlusterFS 搭建配置及使用。
 ---
 
-# GLusterFS
+# GlusterFS
 
 GlusterFS 是一个分布式文件系统，具有强大的横向扩展能力。主要提供的的存储功能为文件存储，当然也可通过其他方式支持快存储和对象存储。与存储相关的分布式文件系统还有 Ceph。
 
